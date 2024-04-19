@@ -1,0 +1,27 @@
+<template>
+	<view class="page">
+		<text class="iconfont">&#xe6dc;</text>
+		<view class="flex">
+			<view class="flex-1 bg-danger" style="height: 200rpx"></view>
+			<view class="flex-1 bg-success" style="height: 200rpx"></view>
+		</view>
+	</view>
+</template>
+
+<script>
+export default {
+	data() {
+		return {
+			title: ''
+		};
+	},
+	onLoad() {
+		
+	},
+	methods: {
+
+	}
+};
+</script>
+
+<style></style>
