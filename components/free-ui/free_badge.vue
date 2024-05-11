@@ -1,5 +1,5 @@
 <template>
-	<text :style="badgeStyle" class="free-badge bg-danger font-sm text-white rounded-circle" :class="badgeClass">{{ contentCount }}</text>
+	<text :style="badgeStyle" class="free-badge bg-danger font-sm text-white rounded-circle" :class="badgeClass" v-if="contentCount > 0">{{ contentCount }}</text>
 </template>
 
 <script>
