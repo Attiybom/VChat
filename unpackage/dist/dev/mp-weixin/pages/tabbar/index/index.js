@@ -102,6 +102,22 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.listData, function (item, index) {
+    var $orig = _vm.__get_orig(item)
+    var f0 = _vm._f("formatTime")(item.update_time)
+    return {
+      $orig: $orig,
+      f0: f0,
+    }
+  })
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0,
+      },
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -135,18 +151,19 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
 
-
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _time = _interopRequireDefault(__webpack_require__(/*! @/common/free-lib/time.js */ 76));
 var freeNavBarVue = function freeNavBarVue() {
   __webpack_require__.e(/*! require.ensure | components/free-ui/free_nav_bar */ "components/free-ui/free_nav_bar").then((function () {
     return resolve(__webpack_require__(/*! @/components/free-ui/free_nav_bar.vue */ 66));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
-// import freeIconButtonVue from "../../../components/free-ui/free_icon_button.vue"
 var _default = {
   components: {
     freeNavBarVue: freeNavBarVue
@@ -154,11 +171,58 @@ var _default = {
   },
   data: function data() {
     return {
-      isShow: true
+      isShow: true,
+      screenWidthPx: 0,
+      listData: [{
+        avatar: '../../../static/images/bg.jpg',
+        nickname: 'summer',
+        update_time: 1620715425,
+        content: 'hello world'
+      }, {
+        avatar: '../../../static/images/bg.jpg',
+        nickname: 'summer',
+        update_time: 1629452242,
+        content: 'hello world'
+      }, {
+        avatar: '../../../static/images/bg.jpg',
+        nickname: 'summer',
+        update_time: 1638701941,
+        content: 'hello world'
+      }, {
+        avatar: '../../../static/images/bg.jpg',
+        nickname: 'summer',
+        update_time: 1673889930,
+        content: 'hello world'
+      }]
     };
+  },
+  created: function created() {
+    this.getScreenWidth();
+  },
+  filters: {
+    formatTime: function formatTime(value) {
+      return _time.default.gettime(value);
+    }
+  },
+  methods: {
+    getScreenWidth: function getScreenWidth() {
+      var systemInfo = uni.getSystemInfoSync();
+      this.screenWidthPx = systemInfo.windowWidth; // 获取屏幕宽度
+    }
+  },
+
+  computed: {
+    remainingWidth: function remainingWidth() {
+      var widthOfOtherContainerPx = uni.upx2px(145); // 直接使用uni.upx2px将145rpx转换为px
+      return this.screenWidthPx - widthOfOtherContainerPx; // 计算剩余宽度
+    }
+  },
+  mounted: function mounted() {
+    console.log(this.remainingWidth);
   }
 };
 exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 
