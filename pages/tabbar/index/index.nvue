@@ -4,10 +4,13 @@
 		<!-- <freeIconButtonVue>&#xe6e3;</freeIconButtonVue> -->
 		<!-- 列表 -->
 		<block v-for="(item, index) in listData" :key="index">
-			<view class="flex align-center" style="display: flex">
-				<view class="flex align-center justify-center " style="width: 145rpx">
+			<view class="flex align-stretch" style="display: flex">
+				<view class="flex align-center justify-center border" style="width: 145rpx">
 					<!-- 头像 -->
-					<image :src="item.avatar" class="rounded" mode="widthFix" style="width: 92rpx; height: 92rpx"></image>
+					<freeAvaterVue :src="item.avatar" size='92' />
+					<!-- 消息个数圆角 -->
+					<freeBadgeVue badge-style="top:15rpx; right:15rpx" badge-class="position-absolute" />
+					<!-- <text style="padding-left: 14rpx;padding-right: 14rpx; padding-top: 6rpx;padding-bottom: 6rpx;top: 15rpx;right: 15rpx;" class="bg-danger position-absolute font-sm text-white rounded-circle">1</text> -->
 				</view>
 				<!-- 具体信息 -->
 				<view class="flex flex-column border-bottom flex-1 py-3 pr-3" :style="{ width: remainingWidth + 'px'}">
@@ -26,12 +29,16 @@
 <script>
 import freeNavBarVue from '@/components/free-ui/free_nav_bar.vue';
 // import freeIconButtonVue from "../../../components/free-ui/free_icon_button.vue"
+import freeAvaterVue from '@/components/free-ui/free_avater.vue';
+import freeBadgeVue from '@/components/free-ui/free_badge.vue';
 
 // utils
 import $Time from '@/common/free-lib/time.js'
 export default {
 	components: {
-		freeNavBarVue
+		freeNavBarVue,
+		freeAvaterVue,
+		freeBadgeVue
 		// freeIconButtonVue
 	},
 	data() {
