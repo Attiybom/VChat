@@ -1,1 +1,1 @@
-<view class="page"><text class="iconfont"></text><view class="flex"><view class="flex-1 bg-danger" style="height:200rpx;"></view><view class="flex-1 bg-success" style="height:200rpx;"></view></view></view>
+<view><free-nav-bar-vue vue-id="f8c7e56e-1" is-show-title="{{isShow}}" title="仿微信（10）" bind:__l="__l"></free-nav-bar-vue></view>
