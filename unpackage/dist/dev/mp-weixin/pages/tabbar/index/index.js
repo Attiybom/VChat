@@ -102,22 +102,6 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.__map(_vm.listData, function (item, index) {
-    var $orig = _vm.__get_orig(item)
-    var f0 = _vm._f("formatTime")(item.update_time)
-    return {
-      $orig: $orig,
-      f0: f0,
-    }
-  })
-  _vm.$mp.data = Object.assign(
-    {},
-    {
-      $root: {
-        l0: l0,
-      },
-    }
-  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -174,11 +158,23 @@ var freeBadgeVue = function freeBadgeVue() {
     return resolve(__webpack_require__(/*! @/components/free-ui/free_badge.vue */ 77));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
+var freeMediaListVue = function freeMediaListVue() {
+  Promise.all(/*! require.ensure | components/free-ui/free_media_list */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/free-ui/free_media_list")]).then((function () {
+    return resolve(__webpack_require__(/*! @/components/free-ui/free_media_list.vue */ 84));
+  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+};
+var freePopupVue = function freePopupVue() {
+  __webpack_require__.e(/*! require.ensure | components/free-ui/free_popup */ "components/free-ui/free_popup").then((function () {
+    return resolve(__webpack_require__(/*! @/components/free-ui/free_popup.vue */ 96));
+  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+};
 var _default = {
   components: {
     freeNavBarVue: freeNavBarVue,
     freeAvaterVue: freeAvaterVue,
-    freeBadgeVue: freeBadgeVue
+    freeBadgeVue: freeBadgeVue,
+    freeMediaListVue: freeMediaListVue,
+    freePopupVue: freePopupVue
     // freeIconButtonVue
   },
   data: function data() {
@@ -189,22 +185,26 @@ var _default = {
         avatar: '../../../static/images/bg.jpg',
         nickname: 'summer',
         update_time: 1620715425,
-        content: 'hello world'
+        content: 'hello world',
+        contentCount: 0
       }, {
         avatar: '../../../static/images/bg.jpg',
         nickname: 'summer',
         update_time: 1629452242,
-        content: 'hello world'
+        content: 'hello world',
+        contentCount: 2
       }, {
         avatar: '../../../static/images/bg.jpg',
         nickname: 'summer',
         update_time: 1638701941,
-        content: 'hello world'
+        content: 'hello world',
+        contentCount: 2
       }, {
         avatar: '../../../static/images/bg.jpg',
         nickname: 'summer',
         update_time: 1673889930,
-        content: 'hello world'
+        content: 'hello world',
+        contentCount: 3
       }]
     };
   },
@@ -220,13 +220,22 @@ var _default = {
     getScreenWidth: function getScreenWidth() {
       var systemInfo = uni.getSystemInfoSync();
       this.screenWidthPx = systemInfo.windowWidth; // 获取屏幕宽度
+    },
+    openExtend: function openExtend() {
+      console.log('index');
+      // 需要传入点击的坐标给弹出层组件
+      this.$refs.extendRef.show(20, 100);
     }
   },
-
   computed: {
     remainingWidth: function remainingWidth() {
       var widthOfOtherContainerPx = uni.upx2px(145); // 直接使用uni.upx2px将145rpx转换为px
       return this.screenWidthPx - widthOfOtherContainerPx; // 计算剩余宽度
+    },
+    contentCountSum: function contentCountSum() {
+      return this.listData.reduce(function (accumulator, currentItem) {
+        return accumulator + currentItem.contentCount;
+      }, 0);
     }
   },
   mounted: function mounted() {

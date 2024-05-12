@@ -27,15 +27,14 @@ import freeBadgeVue from '@/components/free-ui/free_badge.vue';
 
 // utils
 import $Time from '@/common/free-lib/time.js';
+
+import freeBase from '@/common/mixin/free-base.js'
+
 export default {
+	mixins: [freeBase],
 	components: {
 		freeAvaterVue,
 		freeBadgeVue
-	},
-	filters: {
-		formatTime(value) {
-			return $Time.gettime(value);
-		}
 	},
 	props: {
 		item: Object,

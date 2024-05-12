@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "free-avater-vue": "/components/free-ui/free_avater",
+    "free-badge-vue": "/components/free-ui/free_badge"
+  }
+}

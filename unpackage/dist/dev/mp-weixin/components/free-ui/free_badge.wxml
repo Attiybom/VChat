@@ -1,1 +1,1 @@
-<text class="{{['free-badge','bg-danger','font-sm','text-white','rounded-circle',badgeClass]}}" style="{{(badgeStyle)}}">{{contentCount}}</text>
+<block wx:if="{{contentCount>0}}"><text class="{{['free-badge','bg-danger','font-sm','text-white','rounded-circle',badgeClass]}}" style="{{(badgeStyle)}}">{{contentCount}}</text></block>

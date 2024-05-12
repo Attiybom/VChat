@@ -11,17 +11,17 @@
 					<!-- 标题 -->
 					<text v-if="isShowTitle" class="font-md ml-3">
 						<!-- <slot></slot> -->
-						{{ title }}
+						{{ getTitle }}
 					</text>
 				</view>
 
 				<!-- 右边 -->
 				<view class="flex align-center justify-end">
 					<view class="flex align-center justify-center" style="height: 90rpx; width: 90rpx">
-						<text class="iconfont font-md" @click="$emit('click')">&#xe6e3;</text>
+						<text class="iconfont font-md" @click="search">&#xe6e3;</text>
 					</view>
 					<view class="flex align-center justify-center" style="height: 90rpx; width: 90rpx">
-						<text class="iconfont font-md" @click="$emit('click')">&#xe682;</text>
+						<text class="iconfont font-md" @click="openExtend">&#xe682;</text>
 					</view>
 				</view>
 			</view>
@@ -43,10 +43,14 @@ export default {
 			type: String,
 			default: ''
 		},
+		contentCountSum: {
+			type: Number,
+			default: 0
+		},
 		fixed: {
 			type: Boolean,
 			default: true
-		}
+		}	
 	},
 	data() {
 		return {
@@ -60,10 +64,24 @@ export default {
 		// #endif
 		this.navBarHeight = this.statusbarHeight + uni.upx2px(90);
 	},
-	methods: {},
+	methods: {
+		openExtend() {
+			console.log('openExtend')
+			this.$emit('openExtend')
+		},
+		search() {
+			
+		}
+	},
 	computed: {
 		fixedHeight() {
 			return `height: ${this.navBarHeight}px`;
+		},
+		getTitle() {
+			if (this.contentCountSum > 0) {
+				return `${this.title}(${this.contentCountSum})`
+			}
+			return `0`
 		}
 	}
 };

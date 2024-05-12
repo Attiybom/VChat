@@ -162,6 +162,10 @@ var _default = {
       type: String,
       default: ''
     },
+    contentCountSum: {
+      type: Number,
+      default: 0
+    },
     fixed: {
       type: Boolean,
       default: true
@@ -176,10 +180,22 @@ var _default = {
   mounted: function mounted() {
     this.navBarHeight = this.statusbarHeight + uni.upx2px(90);
   },
-  methods: {},
+  methods: {
+    openExtend: function openExtend() {
+      console.log('openExtend');
+      this.$emit('openExtend');
+    },
+    search: function search() {}
+  },
   computed: {
     fixedHeight: function fixedHeight() {
       return "height: ".concat(this.navBarHeight, "px");
+    },
+    getTitle: function getTitle() {
+      if (this.contentCountSum > 0) {
+        return "".concat(this.title, "(").concat(this.contentCountSum, ")");
+      }
+      return "0";
     }
   }
 };

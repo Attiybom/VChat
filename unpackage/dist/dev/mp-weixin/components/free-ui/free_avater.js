@@ -142,9 +142,6 @@ var _default = {
     getStyle: function getStyle() {
       return "width: ".concat(this.size, "rpx; height: ").concat(this.size, "rpx");
     }
-  },
-  mounted: function mounted() {
-    console.log(this.src);
   }
 };
 exports.default = _default;

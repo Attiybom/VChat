@@ -1,11 +1,22 @@
 <template>
 	<view>
-		<freeNavBarVue :is-show-title="isShow" :title="'仿微信（10）'"></freeNavBarVue>
+		<!-- 导航栏 -->
+		<freeNavBarVue :is-show-title="isShow" :title="'仿微信'" :contentCountSum='contentCountSum' @openExtend="openExtend"></freeNavBarVue>
 		<!-- <freeIconButtonVue>&#xe6e3;</freeIconButtonVue> -->
 		<!-- 列表 -->
 		<block v-for="(item, index) in listData" :key="index">
-			<freeMediaListVue :item='item' :index="index"> </freeMediaListVue>
+			<freeMediaListVue :item="item" :index="index"></freeMediaListVue>
 		</block>
+		<!-- 弹出层 -->
+		<freePopupVue ref="extendRef" :maskColor="true" :is-fixed-bottom="false">
+			<view class="" style="width: 300rpx; height: 400rpx"></view>
+		</freePopupVue>
+		<!-- 		<div class="" style="z-index: 9999; overflow: hidden">
+			<div class="position-fixed top-0 left-0 right-0 bottom-0" style="background-color: rgba(0, 0, 0, 0.5)"></div>
+			<div class="position-fixed bg-white" style="left: 100rpx; top: 100rpx">
+				<view class="" style="height: 300rpx; width: 200rpx"></view>
+			</div>
+		</div> -->
 	</view>
 </template>
 
@@ -15,16 +26,18 @@ import freeNavBarVue from '@/components/free-ui/free_nav_bar.vue';
 import freeAvaterVue from '@/components/free-ui/free_avater.vue';
 import freeBadgeVue from '@/components/free-ui/free_badge.vue';
 
-import freeMediaListVue from '../../../components/free-ui/free_media_list.vue';
+import freeMediaListVue from '@/components/free-ui/free_media_list.vue';
+import freePopupVue from '@/components/free-ui/free_popup.vue';
 
 // utils
-import $Time from '@/common/free-lib/time.js'
+import $Time from '@/common/free-lib/time.js';
 export default {
 	components: {
 		freeNavBarVue,
 		freeAvaterVue,
 		freeBadgeVue,
-		freeMediaListVue
+		freeMediaListVue,
+		freePopupVue
 		// freeIconButtonVue
 	},
 	data() {
@@ -37,7 +50,7 @@ export default {
 					nickname: 'summer',
 					update_time: 1620715425,
 					content: 'hello world',
-					contentCount: -1
+					contentCount: 0
 				},
 				{
 					avatar: '../../../static/images/bg.jpg',
@@ -59,7 +72,7 @@ export default {
 					update_time: 1673889930,
 					content: 'hello world',
 					contentCount: 3
-				},
+				}
 			]
 		};
 	},
@@ -68,23 +81,33 @@ export default {
 	},
 	filters: {
 		formatTime(value) {
-			return $Time.gettime(value)
+			return $Time.gettime(value);
 		}
 	},
 	methods: {
 		getScreenWidth() {
 			const systemInfo = uni.getSystemInfoSync();
 			this.screenWidthPx = systemInfo.windowWidth; // 获取屏幕宽度
+		},
+		openExtend() {
+			console.log('index');
+			// 需要传入点击的坐标给弹出层组件
+			this.$refs.extendRef.show(20, 100);
 		}
 	},
 	computed: {
 		remainingWidth() {
 			const widthOfOtherContainerPx = uni.upx2px(145); // 直接使用uni.upx2px将145rpx转换为px
 			return this.screenWidthPx - widthOfOtherContainerPx; // 计算剩余宽度
+		},
+		contentCountSum() {
+			return this.listData.reduce((accumulator, currentItem) => {
+				return accumulator + currentItem.contentCount;
+			}, 0);
 		}
 	},
 	mounted() {
-		console.log(this.remainingWidth)
+		console.log(this.remainingWidth);
 	}
 };
 </script>

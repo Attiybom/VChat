@@ -2,6 +2,8 @@
   "usingComponents": {
     "free-nav-bar-vue": "/components/free-ui/free_nav_bar",
     "free-avater-vue": "/components/free-ui/free_avater",
-    "free-badge-vue": "/components/free-ui/free_badge"
+    "free-badge-vue": "/components/free-ui/free_badge",
+    "free-media-list-vue": "/components/free-ui/free_media_list",
+    "free-popup-vue": "/components/free-ui/free_popup"
   }
 }
